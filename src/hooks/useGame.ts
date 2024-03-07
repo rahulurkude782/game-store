@@ -22,12 +22,13 @@ interface Response {
 }
 
 export default function useGame() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [games, setGames] = useState<Game[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
     const controller = new AbortController();
+    setLoading(true);
     apiClient
       .get<Response>("/games", { signal: controller.signal })
       .then((res) => {
@@ -41,7 +42,7 @@ export default function useGame() {
       })
       .finally(() => setLoading(false));
 
-    return () => controller.abort();
+    // return () => controller.abort();
   }, []);
 
   return { loading, error, games };
