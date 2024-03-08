@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 
 const BoxContainer = ({ children }: PropsWithChildren) => {
   return (
-    <Box width="450px" borderRadius="10px" overflow="hidden">
+    <Box width="400px" borderRadius="10px" overflow="hidden">
       {children}
     </Box>
   );
