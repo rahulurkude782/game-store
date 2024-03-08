@@ -5,7 +5,7 @@ import GameGrid from "./components/GameGrid";
 import useGenre from "./hooks/useGenre";
 
 function App() {
-  const { genre } = useGenre();
+  const { data: genre } = useGenre();
   return (
     <Grid
       templateAreas={{

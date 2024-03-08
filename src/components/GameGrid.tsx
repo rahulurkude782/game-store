@@ -5,7 +5,7 @@ import GameCardSkeleton from "./GameCardSkeleon";
 import BoxContainer from "./BoxContainer";
 
 const GameGrid = () => {
-  const { loading, error, games } = useGame();
+  const { loading, error, data: games } = useGame();
   if (error) return <p>{error}</p>;
   return (
     <>
