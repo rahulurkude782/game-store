@@ -4,16 +4,31 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleon";
 import BoxContainer from "./BoxContainer";
 import { Genre } from "../hooks/useGenre";
+import PlateFormSelector from "./PlateFormSelector";
+import { Platform } from "../hooks/usePlatform";
 
 interface Props {
   selectedGenre: Genre | null;
+  selectedPlatform: Platform | null;
+  onSelectPlatform: (platform: Platform) => void;
 }
 
-const GameGrid = ({ selectedGenre }: Props) => {
-  const { loading, error, data: games } = useGame(selectedGenre);
+const GameGrid = ({
+  selectedGenre,
+  selectedPlatform,
+  onSelectPlatform,
+}: Props) => {
+  const {
+    loading,
+    error,
+    data: games,
+  } = useGame(selectedGenre, selectedPlatform);
   if (error) return <p>{error}</p>;
   return (
     <>
+      {games.length ? (
+        <PlateFormSelector onSelectPlatform={onSelectPlatform} selectedPlatform={selectedPlatform} />
+      ) : null}
       <SimpleGrid
         columns={{
           base: 1,

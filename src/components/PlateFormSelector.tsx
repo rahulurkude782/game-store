@@ -5,20 +5,38 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
+  Skeleton,
 } from "@chakra-ui/react";
 import { BsChevronRight } from "react-icons/bs";
+import usePlatform, { Platform } from "../hooks/usePlatform";
 
-const PlateFormSelector = () => {
+interface Props {
+  selectedPlatform: Platform | null;
+  onSelectPlatform: (platform: Platform) => void;
+}
+
+const PlateFormSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
+  const { data: platforms, loading, error } = usePlatform();
+
+  if (loading) return <Skeleton height={5} />;
+
+  if (error) return null;
+
   return (
     <Box padding={2}>
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronRight />}>
-          Platforms
+          {selectedPlatform?.name || "Platforms"}
         </MenuButton>
         <MenuList>
-          <MenuItem>Item 1</MenuItem>
-          <MenuItem>Item 2</MenuItem>
-          <MenuItem>Item 3</MenuItem>
+          {platforms.map((platform) => (
+            <MenuItem
+              key={platform.id}
+              onClick={() => onSelectPlatform(platform)}
+            >
+              {platform.name}
+            </MenuItem>
+          ))}
         </MenuList>
       </Menu>
     </Box>
