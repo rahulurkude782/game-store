@@ -6,16 +6,28 @@ import BoxContainer from "./BoxContainer";
 
 const GameGrid = () => {
   const { loading, error, data: games } = useGame();
+  console.log({ loading });
   if (error) return <p>{error}</p>;
   return (
     <>
-      <SimpleGrid columns={[1, 2, 3]} padding="10px" spacing={4}>
-        {loading && <GameCardSkeleton count={9} />}
-        {games.map((game) => (
-          <BoxContainer key={game.id}>
-            <GameCard game={game} />
-          </BoxContainer>
-        ))}
+      <SimpleGrid
+        columns={{
+          base: 1,
+          md: 2,
+          lg: 3,
+        }}
+        padding="10px"
+        spacing={3}
+      >
+        {loading ? (
+          <GameCardSkeleton count={9} />
+        ) : (
+          games.map((game) => (
+            <BoxContainer key={game.id}>
+              <GameCard game={game} />
+            </BoxContainer>
+          ))
+        )}
       </SimpleGrid>
     </>
   );

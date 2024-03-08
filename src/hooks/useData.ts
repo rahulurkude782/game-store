@@ -13,8 +13,8 @@ export default function useData<T>(endPoint: string) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const controller = new AbortController();
     setLoading(true);
+    const controller = new AbortController();
     apiClient
       .get<Response<T>>(endPoint, { signal: controller.signal })
       .then((res) => {
