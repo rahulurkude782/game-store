@@ -1,4 +1,4 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { HStack, SimpleGrid } from "@chakra-ui/react";
 import { GameQuery } from "../App";
 import useGame from "../hooks/useGame";
 import { Platform } from "../hooks/usePlatform";
@@ -6,22 +6,36 @@ import BoxContainer from "./BoxContainer";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleon";
 import PlateFormSelector from "./PlateFormSelector";
+import OrderSelector from "./OrderSelector";
 
 interface Props {
   gameQuery: GameQuery;
   onSelectPlatform: (platform: Platform) => void;
+  onSelectSortOrder: (order: string) => void;
 }
 
-const GameGrid = ({ gameQuery, onSelectPlatform }: Props) => {
+const GameGrid = ({
+  gameQuery,
+  onSelectPlatform,
+  onSelectSortOrder,
+}: Props) => {
   const { loading, error, data: games } = useGame(gameQuery);
   if (error) return <p>{error}</p>;
   return (
     <>
       {games.length ? (
-        <PlateFormSelector
-          onSelectPlatform={onSelectPlatform}
-          selectedPlatform={gameQuery.platform}
-        />
+        <>
+          <HStack>
+            <PlateFormSelector
+              onSelectPlatform={onSelectPlatform}
+              selectedPlatform={gameQuery.platform}
+            />
+            <OrderSelector
+              selectedOrder={gameQuery?.order}
+              onSelectSortOrder={onSelectSortOrder}
+            />
+          </HStack>
+        </>
       ) : null}
       <SimpleGrid
         columns={{

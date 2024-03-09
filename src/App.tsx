@@ -10,11 +10,11 @@ import { Platform } from "./hooks/usePlatform";
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
+  order: string | null;
 }
 
 function App() {
   const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
-
   return (
     <Grid
       templateAreas={{
@@ -39,6 +39,7 @@ function App() {
           onSelectPlatform={(platform) =>
             setGameQuery({ ...gameQuery, platform })
           }
+          onSelectSortOrder={(order) => setGameQuery({ ...gameQuery, order })}
         />
       </GridItem>
     </Grid>
