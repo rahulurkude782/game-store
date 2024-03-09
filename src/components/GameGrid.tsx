@@ -46,7 +46,7 @@ const GameGrid = ({
           lg: 3,
         }}
         padding="10px"
-        spacing={3}
+        spacing={6}
       >
         {loading ? (
           <GameCardSkeleton count={9} />
