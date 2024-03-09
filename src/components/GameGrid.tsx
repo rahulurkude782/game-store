@@ -25,7 +25,7 @@ const GameGrid = ({
     <>
       {games.length ? (
         <>
-          <HStack>
+          <HStack paddingX="2px">
             <PlateFormSelector
               onSelectPlatform={onSelectPlatform}
               selectedPlatform={gameQuery.platform}

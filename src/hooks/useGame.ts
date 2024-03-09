@@ -23,6 +23,7 @@ export default function useGame(gameQuery: GameQuery) {
         genres: gameQuery.genre?.id,
         platforms: gameQuery.platform?.id,
         ordering: gameQuery?.order,
+        search: gameQuery.searchString,
       },
     },
     [gameQuery]
