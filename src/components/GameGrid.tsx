@@ -7,6 +7,7 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleon";
 import PlateFormSelector from "./PlateFormSelector";
 import OrderSelector from "./OrderSelector";
+import DynamicHeading from "./DynamicHeading";
 
 interface Props {
   gameQuery: GameQuery;
@@ -25,6 +26,7 @@ const GameGrid = ({
     <>
       {games.length ? (
         <>
+          <DynamicHeading gameQuery={gameQuery} />
           <HStack paddingX="2px">
             <PlateFormSelector
               onSelectPlatform={onSelectPlatform}
