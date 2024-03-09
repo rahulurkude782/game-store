@@ -3,6 +3,7 @@ import { Game } from "../hooks/useGame";
 import PlatformIcons from "./PlatformIcons";
 import getCropedImage from "../services/image-crop";
 import CiritcBadge from "./CiritcBadge";
+import Emoji from "./Emoji";
 
 interface Props {
   game: Game;
@@ -17,13 +18,14 @@ const GameCard = ({ game }: Props) => {
         width="100%"
       />
       <CardBody>
-        <Heading fontSize="2xl">{game.name}</Heading>
-        <HStack justify="space-between">
+        <HStack justify="space-between" marginBottom={3}>
           <PlatformIcons
             plateforms={game.parent_platforms.map((p) => p.platform)}
           />
           <CiritcBadge metacritic={game.metacritic} />
         </HStack>
+        <Heading fontSize="2xl">{game.name}</Heading>
+        <Emoji rating={game.rating_top} />
       </CardBody>
     </Card>
   );
