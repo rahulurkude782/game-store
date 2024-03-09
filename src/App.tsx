@@ -37,7 +37,7 @@ function App() {
           />
         </GridItem>
       </Show>
-      <GridItem area="main" colSpan={1}>
+      <GridItem area="main" paddingX="10px">
         <GameGrid
           gameQuery={gameQuery}
           onSelectPlatform={(platform) =>
