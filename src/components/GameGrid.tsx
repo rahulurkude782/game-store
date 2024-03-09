@@ -24,21 +24,20 @@ const GameGrid = ({
   if (error) return <p>{error}</p>;
   return (
     <>
-      {games.length ? (
-        <>
-          <DynamicHeading gameQuery={gameQuery} />
-          <HStack paddingX="2px">
-            <PlateFormSelector
-              onSelectPlatform={onSelectPlatform}
-              selectedPlatform={gameQuery.platform}
-            />
-            <OrderSelector
-              selectedOrder={gameQuery?.order}
-              onSelectSortOrder={onSelectSortOrder}
-            />
-          </HStack>
-        </>
-      ) : null}
+      <>
+        <DynamicHeading gameQuery={gameQuery} />
+        <HStack paddingX="2px">
+          <PlateFormSelector
+            onSelectPlatform={onSelectPlatform}
+            selectedPlatform={gameQuery.platform}
+          />
+          <OrderSelector
+            selectedOrder={gameQuery?.order}
+            onSelectSortOrder={onSelectSortOrder}
+          />
+        </HStack>
+      </>
+
       <SimpleGrid
         columns={{
           base: 1,
