@@ -5,7 +5,13 @@ const GenreListSkeleton = ({ count }: { count: number }) => {
   return (
     <>
       {arr.map((item, idx) => (
-        <Skeleton key={item + idx} height={10} width={200} marginY={5} />
+        <Skeleton
+          key={item + idx}
+          height={10}
+          width={200}
+          marginY={5}
+          borderRadius="10px"
+        />
       ))}
     </>
   );
