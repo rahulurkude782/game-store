@@ -1,33 +1,27 @@
 import { SimpleGrid } from "@chakra-ui/react";
+import { GameQuery } from "../App";
 import useGame from "../hooks/useGame";
+import { Platform } from "../hooks/usePlatform";
+import BoxContainer from "./BoxContainer";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleon";
-import BoxContainer from "./BoxContainer";
-import { Genre } from "../hooks/useGenre";
 import PlateFormSelector from "./PlateFormSelector";
-import { Platform } from "../hooks/usePlatform";
 
 interface Props {
-  selectedGenre: Genre | null;
-  selectedPlatform: Platform | null;
+  gameQuery: GameQuery;
   onSelectPlatform: (platform: Platform) => void;
 }
 
-const GameGrid = ({
-  selectedGenre,
-  selectedPlatform,
-  onSelectPlatform,
-}: Props) => {
-  const {
-    loading,
-    error,
-    data: games,
-  } = useGame(selectedGenre, selectedPlatform);
+const GameGrid = ({ gameQuery, onSelectPlatform }: Props) => {
+  const { loading, error, data: games } = useGame(gameQuery);
   if (error) return <p>{error}</p>;
   return (
     <>
       {games.length ? (
-        <PlateFormSelector onSelectPlatform={onSelectPlatform} selectedPlatform={selectedPlatform} />
+        <PlateFormSelector
+          onSelectPlatform={onSelectPlatform}
+          selectedPlatform={gameQuery.platform}
+        />
       ) : null}
       <SimpleGrid
         columns={{
