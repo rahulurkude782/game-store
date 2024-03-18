@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import genres from "../data/genres";
 import apiClient, { Response } from "../services/api-client";
 
 export interface Platform {
@@ -17,7 +16,6 @@ export default function usePlatform() {
         .then((res) => res.data.results)
         .catch((error) => error),
     staleTime: 24 * 60 * 60 * 1000, //24hrs
-    initialData: genres,
   });
   return { data, isPending, error };
 }
