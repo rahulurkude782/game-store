@@ -20,8 +20,8 @@ const GameGrid = ({
   onSelectPlatform,
   onSelectSortOrder,
 }: Props) => {
-  const { loading, error, data: games } = useGame(gameQuery);
-  if (error) return <p>{error}</p>;
+  const { data: games, isPending, error } = useGame(gameQuery);
+  if (error) return <p>{error.message}</p>;
   return (
     <>
       <>
@@ -47,10 +47,10 @@ const GameGrid = ({
         padding="10px"
         spacing={6}
       >
-        {loading ? (
+        {isPending ? (
           <GameCardSkeleton count={9} />
         ) : (
-          games.map((game) => (
+          games?.map((game) => (
             <BoxContainer key={game.id}>
               <GameCard game={game} />
             </BoxContainer>

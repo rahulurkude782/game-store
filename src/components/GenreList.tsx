@@ -16,23 +16,23 @@ interface Props {
 }
 
 const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
-  const { data: genre, loading, error } = useGenre();
-  if (loading) return <GenreListSkeleton count={10} />;
+  const { data: genre, isPending, error } = useGenre();
+  if (isPending) return <GenreListSkeleton count={10} />;
 
   if (error) return null;
 
   return (
     <List>
-      <Heading fontSize="2xl" marginBottom={3}>
+      <Heading fontSize="3xl" marginBottom={3}>
         Genre
       </Heading>
-      {genre.map((genre) => (
+      {genre?.map((genre) => (
         <ListItem key={genre.id} paddingY="5px">
-          <HStack>
+          <HStack gap="20px">
             <Image
               src={getCropedImage(genre.image_background)}
-              boxSize={35}
-              borderRadius={4}
+              boxSize="45"
+              borderRadius="8"
               objectFit="cover"
             />
             <Button

@@ -1,4 +1,6 @@
-import useData from "./useData";
+import { useQuery } from "@tanstack/react-query";
+import genres from "../data/genres";
+import apiClient, { Response } from "../services/api-client";
 
 export interface Platform {
   id: number;
@@ -7,5 +9,15 @@ export interface Platform {
 }
 
 export default function usePlatform() {
-  return useData<Platform>("/platforms/lists/parents");
+  const { data, isPending, error } = useQuery<Platform[], Error>({
+    queryKey: ["platforms"],
+    queryFn: () =>
+      apiClient
+        .get<Response<Platform>>("/platforms/lists/parents")
+        .then((res) => res.data.results)
+        .catch((error) => error),
+    staleTime: 24 * 60 * 60 * 1000, //24hrs
+    initialData: genres,
+  });
+  return { data, isPending, error };
 }

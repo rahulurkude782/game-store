@@ -10,7 +10,7 @@ const DynamicHeading = ({ gameQuery }: Props) => {
     gameQuery.genre?.name || ""
   } Games`;
   return (
-    <Heading as="h1" fontSize="5xl" padding={2}>
+    <Heading as="h1" fontSize="7xl" padding={2}>
       {content}
     </Heading>
   );

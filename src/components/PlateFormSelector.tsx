@@ -16,9 +16,9 @@ interface Props {
 }
 
 const PlateFormSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
-  const { data: platforms, loading, error } = usePlatform();
+  const { data: platforms, isPending, error } = usePlatform();
 
-  if (loading) return <Skeleton height={5} />;
+  if (isPending) return <Skeleton height={5} />;
 
   if (error) return null;
 
