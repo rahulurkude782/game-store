@@ -1,4 +1,5 @@
-import { HStack, SimpleGrid } from "@chakra-ui/react";
+import React from "react";
+import { Box, Button, HStack, SimpleGrid, Spinner } from "@chakra-ui/react";
 import { GameQuery } from "../App";
 import useGame from "../hooks/useGame";
 import { Platform } from "../hooks/usePlatform";
@@ -20,43 +21,50 @@ const GameGrid = ({
   onSelectPlatform,
   onSelectSortOrder,
 }: Props) => {
-  const { data: games, isPending, error } = useGame(gameQuery);
+  const { data, isPending, error, isFetchingNextPage, fetchNextPage } =
+    useGame(gameQuery);
   if (error) return <p>{error.message}</p>;
   return (
     <>
-      <>
-        <DynamicHeading gameQuery={gameQuery} />
-        <HStack paddingX="2px">
-          <PlateFormSelector
-            onSelectPlatform={onSelectPlatform}
-            selectedPlatform={gameQuery.platform}
-          />
-          <OrderSelector
-            selectedOrder={gameQuery?.order}
-            onSelectSortOrder={onSelectSortOrder}
-          />
-        </HStack>
-      </>
+      <DynamicHeading gameQuery={gameQuery} />
+      <HStack paddingX="2px">
+        <PlateFormSelector
+          onSelectPlatform={onSelectPlatform}
+          selectedPlatform={gameQuery.platform}
+        />
+        <OrderSelector
+          selectedOrder={gameQuery?.order}
+          onSelectSortOrder={onSelectSortOrder}
+        />
+      </HStack>
 
-      <SimpleGrid
-        columns={{
-          base: 1,
-          md: 2,
-          lg: 3,
-        }}
-        padding="10px"
-        spacing={6}
-      >
-        {isPending ? (
-          <GameCardSkeleton count={9} />
-        ) : (
-          games?.map((game) => (
-            <BoxContainer key={game.id}>
-              <GameCard game={game} />
-            </BoxContainer>
-          ))
-        )}
-      </SimpleGrid>
+      <Box padding="10px">
+        <SimpleGrid
+          columns={{
+            base: 1,
+            md: 2,
+            lg: 3,
+          }}
+          spacing={6}
+        >
+          {isPending ? (
+            <GameCardSkeleton count={9} />
+          ) : (
+            data.pages.map((page, idx) => (
+              <React.Fragment key={idx}>
+                {page.results?.map((game) => (
+                  <BoxContainer key={game.id}>
+                    <GameCard game={game} />
+                  </BoxContainer>
+                ))}
+              </React.Fragment>
+            ))
+          )}
+        </SimpleGrid>
+        <Button onClick={() => fetchNextPage()} marginY="20px">
+          {isFetchingNextPage ? <Spinner /> : "Load more"}
+        </Button>
+      </Box>
     </>
   );
 };
