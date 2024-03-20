@@ -27,7 +27,7 @@ export default function useGame(gameQuery: GameQuery) {
           search: gameQuery.searchString,
         },
       }),
-    staleTime: 60 * 1000, //1min
+    staleTime: 24 * 60 * 60 * 1000, //24hrs
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.next ? allPages.length + 1 : undefined;
