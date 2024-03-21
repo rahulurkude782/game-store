@@ -8,7 +8,8 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import { BsChevronRight } from "react-icons/bs";
-import usePlatform, { Platform } from "../hooks/usePlatform";
+import usePlatforms, { Platform } from "../hooks/usePlatforms";
+import usePlatform from "../hooks/usePlatform";
 
 interface Props {
   selectedPlatformId?: number;
@@ -16,10 +17,8 @@ interface Props {
 }
 
 const PlateFormSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
-  const { data: platforms, isPending, error } = usePlatform();
-  const platform = platforms.find(
-    (platform) => platform.id === selectedPlatformId
-  );
+  const { data: platforms, isPending, error } = usePlatforms();
+  const platform = usePlatform(selectedPlatformId);
 
   if (isPending) return <Skeleton height={5} />;
 

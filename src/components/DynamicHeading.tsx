@@ -8,13 +8,8 @@ interface Props {
 }
 
 const DynamicHeading = ({ gameQuery }: Props) => {
-  const { data: genres } = useGenre();
-  const { data: platforms } = usePlatform();
-
-  const genre = genres.find((genre) => genre.id === gameQuery.genreId);
-  const platform = platforms.find(
-    (platform) => platform.id === gameQuery.platformId
-  );
+  const genre = useGenre(gameQuery.genreId);
+  const platform = usePlatform(gameQuery.platformId);
 
   const content = `${platform?.name || ""} ${genre?.name || ""} Games`;
   return (

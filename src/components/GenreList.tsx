@@ -6,7 +6,7 @@ import {
   List,
   ListItem,
 } from "@chakra-ui/react";
-import useGenre, { Genre } from "../hooks/useGenre";
+import useGenres, { Genre } from "../hooks/useGenres";
 import getCropedImage from "../services/image-crop";
 import GenreListSkeleton from "./GenreListSkeleton";
 
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
-  const { data: genre, isPending, error } = useGenre();
+  const { data: genre, isPending, error } = useGenres();
   if (isPending) return <GenreListSkeleton count={10} />;
 
   if (error) return null;
