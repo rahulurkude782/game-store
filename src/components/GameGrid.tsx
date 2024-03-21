@@ -33,7 +33,7 @@ const GameGrid = ({
       <HStack paddingX="2px">
         <PlateFormSelector
           onSelectPlatform={onSelectPlatform}
-          selectedPlatform={gameQuery.platform}
+          selectedPlatformId={gameQuery.platformId}
         />
         <OrderSelector
           selectedOrder={gameQuery?.order}

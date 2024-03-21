@@ -11,11 +11,11 @@ import getCropedImage from "../services/image-crop";
 import GenreListSkeleton from "./GenreListSkeleton";
 
 interface Props {
-  selectedGenre: Genre | null;
+  selectedGenreId?: number;
   onSelectGenre: (genre: Genre) => void;
 }
 
-const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
+const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
   const { data: genre, isPending, error } = useGenre();
   if (isPending) return <GenreListSkeleton count={10} />;
 
@@ -38,7 +38,7 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
             <Button
               onClick={() => onSelectGenre(genre)}
               variant="link"
-              fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
+              fontWeight={genre.id === selectedGenreId ? "bold" : "normal"}
               fontSize="xl"
               whiteSpace="normal"
               textAlign="left"

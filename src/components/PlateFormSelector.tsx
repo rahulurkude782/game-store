@@ -11,12 +11,15 @@ import { BsChevronRight } from "react-icons/bs";
 import usePlatform, { Platform } from "../hooks/usePlatform";
 
 interface Props {
-  selectedPlatform: Platform | null;
+  selectedPlatformId?: number;
   onSelectPlatform: (platform: Platform) => void;
 }
 
-const PlateFormSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
+const PlateFormSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
   const { data: platforms, isPending, error } = usePlatform();
+  const platform = platforms.find(
+    (platform) => platform.id === selectedPlatformId
+  );
 
   if (isPending) return <Skeleton height={5} />;
 
@@ -26,7 +29,7 @@ const PlateFormSelector = ({ selectedPlatform, onSelectPlatform }: Props) => {
     <Box padding={2}>
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronRight />}>
-          {selectedPlatform?.name || "Platforms"}
+          {platform?.name || "Platforms"}
         </MenuButton>
         <MenuList>
           {platforms?.map((platform) => (
