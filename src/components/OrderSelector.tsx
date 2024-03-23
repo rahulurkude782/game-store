@@ -1,19 +1,19 @@
 import {
+  Box,
   Button,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Box,
 } from "@chakra-ui/react";
 import { BsChevronRight } from "react-icons/bs";
+import useGameStore from "../store/useGameStore";
 
-interface Props {
-  selectedOrder: string | null;
-  onSelectSortOrder: (order: string) => void;
-}
-
-const OrderSelector = ({ selectedOrder, onSelectSortOrder }: Props) => {
+const OrderSelector = () => {
+  const { selectedOrder, setOrder } = useGameStore((store) => ({
+    selectedOrder: store.gameQuery.order,
+    setOrder: store.setOrder,
+  }));
   const sortOrders = [
     { value: "", label: "Relevance" },
     { value: "-added", label: "Date Added" },
@@ -34,10 +34,7 @@ const OrderSelector = ({ selectedOrder, onSelectSortOrder }: Props) => {
         </MenuButton>
         <MenuList>
           {sortOrders.map((order) => (
-            <MenuItem
-              key={order.value}
-              onClick={() => onSelectSortOrder(order.value)}
-            >
+            <MenuItem key={order.value} onClick={() => setOrder(order.value)}>
               {order.label}
             </MenuItem>
           ))}

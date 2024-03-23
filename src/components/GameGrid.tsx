@@ -1,9 +1,7 @@
 import { HStack, SimpleGrid, Spinner } from "@chakra-ui/react";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { GameQuery } from "../App";
 import useGame from "../hooks/useGame";
-import { Platform } from "../hooks/usePlatforms";
 import BoxContainer from "./BoxContainer";
 import DynamicHeading from "./DynamicHeading";
 import GameCard from "./GameCard";
@@ -11,34 +9,17 @@ import GameCardSkeleton from "./GameCardSkeleon";
 import OrderSelector from "./OrderSelector";
 import PlateFormSelector from "./PlateFormSelector";
 
-interface Props {
-  gameQuery: GameQuery;
-  onSelectPlatform: (platform: Platform) => void;
-  onSelectSortOrder: (order: string) => void;
-}
-
-const GameGrid = ({
-  gameQuery,
-  onSelectPlatform,
-  onSelectSortOrder,
-}: Props) => {
-  const { data, isPending, error, hasNextPage, fetchNextPage } =
-    useGame(gameQuery);
+const GameGrid = () => {
+  const { data, isPending, error, hasNextPage, fetchNextPage } = useGame();
   if (error) return <p>{error.message}</p>;
   const fetchGameCount =
     data?.pages.reduce((total, page) => total + page.results.length, 0) || 0;
   return (
     <>
-      <DynamicHeading gameQuery={gameQuery} />
+      <DynamicHeading />
       <HStack paddingX="2px">
-        <PlateFormSelector
-          onSelectPlatform={onSelectPlatform}
-          selectedPlatformId={gameQuery.platformId}
-        />
-        <OrderSelector
-          selectedOrder={gameQuery?.order}
-          onSelectSortOrder={onSelectSortOrder}
-        />
+        <PlateFormSelector />
+        <OrderSelector />
       </HStack>
       <InfiniteScroll
         dataLength={fetchGameCount}

@@ -8,17 +8,14 @@ import {
   Skeleton,
 } from "@chakra-ui/react";
 import { BsChevronRight } from "react-icons/bs";
-import usePlatforms, { Platform } from "../hooks/usePlatforms";
 import usePlatform from "../hooks/usePlatform";
+import usePlatforms from "../hooks/usePlatforms";
+import useGameStore from "../store/useGameStore";
 
-interface Props {
-  selectedPlatformId?: number;
-  onSelectPlatform: (platform: Platform) => void;
-}
-
-const PlateFormSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
+const PlateFormSelector = () => {
+  const setPlatFormId = useGameStore((store) => store.setPlatFormId);
   const { data: platforms, isPending, error } = usePlatforms();
-  const platform = usePlatform(selectedPlatformId);
+  const platform = usePlatform();
 
   if (isPending) return <Skeleton height={5} />;
 
@@ -34,7 +31,7 @@ const PlateFormSelector = ({ selectedPlatformId, onSelectPlatform }: Props) => {
           {platforms?.map((platform) => (
             <MenuItem
               key={platform.id}
-              onClick={() => onSelectPlatform(platform)}
+              onClick={() => setPlatFormId(platform.id)}
             >
               {platform.name}
             </MenuItem>
