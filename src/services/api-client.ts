@@ -26,6 +26,13 @@ class APIClient<T> {
       .then((res) => res.data)
       .catch((error) => error);
   };
+
+  find = (id: number | string, config?: AxiosRequestConfig) => {
+    return axiosInstance
+      .get<T>(this.endPoint + "/" + id, config)
+      .then((res) => res.data)
+      .catch((error) => error);
+  };
 }
 
 export default APIClient;
