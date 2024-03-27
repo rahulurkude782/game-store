@@ -8,7 +8,7 @@ interface Trailer {
   data: { 400: string; max: string };
 }
 
-export default function useTrailer(gameId: number) {
+export default function useTrailers(gameId: number) {
   const apiClient = new APIClient<Trailer>(`/games/${gameId}/movies`);
   return useQuery({
     queryKey: ["trailer", gameId],

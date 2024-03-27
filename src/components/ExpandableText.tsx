@@ -19,16 +19,14 @@ const ExpandableText = ({ game }: Props) => {
   return (
     <Box>
       <Heading>{game.name}</Heading>
-      <Text>
-        {description}...
-        <Button
-          marginX="10px"
-          colorScheme="yellow"
-          onClick={() => setExpandable(!isExpandable)}
-        >
-          {isExpandable ? "Show less" : "Read more"}
-        </Button>
-      </Text>
+      <Text>{description}...</Text>
+      <Button
+        marginY={3}
+        colorScheme="yellow"
+        onClick={() => setExpandable(!isExpandable)}
+      >
+        {isExpandable ? "Show less" : "Read more"}
+      </Button>
     </Box>
   );
 };
