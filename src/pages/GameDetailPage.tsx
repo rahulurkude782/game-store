@@ -2,6 +2,8 @@ import { Box, HStack, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import ExpandableText from "../components/ExpandableText";
 import useGame from "../hooks/useGame";
+import GameAttribute from "../components/GameAttribute";
+import GameTrailers from "../components/GameTrailers";
 
 const GameDetailPage = () => {
   const params = useParams();
@@ -16,6 +18,8 @@ const GameDetailPage = () => {
   return (
     <Box padding={5}>
       <ExpandableText game={game} />
+      <GameAttribute game={game} />
+      <GameTrailers gameId={game.id} />
     </Box>
   );
 };

@@ -3,11 +3,19 @@ import ms from "ms";
 import APIClient, { Response } from "../services/api-client";
 import useGameStore from "../store/useGameStore";
 import { Platform } from "./usePlatforms";
+import { Genre } from "./useGenres";
+
+interface Publishers {
+  id: number;
+  name: string;
+}
 
 export interface Game {
   id: number;
   name: string;
   background_image: string;
+  genres: Genre[];
+  publishers: Publishers[];
   parent_platforms: { platform: Platform }[];
   metacritic: number;
   rating_top: number;

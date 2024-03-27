@@ -4,7 +4,7 @@ interface Props {
   metacritic: number;
 }
 
-const CiritcBadge = ({ metacritic }: Props) => {
+const CriticBadge = ({ metacritic }: Props) => {
   const critic = metacritic >= 75 ? "green" : metacritic <= 65 ? "red" : "";
   return (
     <Badge colorScheme={critic} fontSize="14px" borderRadius="4px">
@@ -13,4 +13,4 @@ const CiritcBadge = ({ metacritic }: Props) => {
   );
 };
 
-export default CiritcBadge;
+export default CriticBadge;
